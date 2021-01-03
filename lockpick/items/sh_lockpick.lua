@@ -1,7 +1,7 @@
 
 -- the code organization has gone awol
 ITEM.name = "Lockpick"
-ITEM.description = "Something used to pick locks and zip-ties."
+ITEM.description = "Something used to pick locks."
 ITEM.price = 20
 ITEM.model = "models/weapons/w_crowbar.mdl"
 ITEM.functions.Use = {
