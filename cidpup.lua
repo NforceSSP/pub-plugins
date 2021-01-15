@@ -10,6 +10,7 @@ function PLUGIN:CanPlayerTakeItem(client, item)
 	local char = client:GetCharacter()
 	local inv = char:GetInventory()
 	local ciditem = inv:HasItem("cid")
+        if client:Team() != 2 then return end -- only civs are disallowed. change the number if needed
 
 	if ciditem then
 		hasID = true
