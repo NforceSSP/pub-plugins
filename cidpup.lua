@@ -3,6 +3,7 @@ local PLUGIN = PLUGIN
 
 PLUGIN.name = "CIDPUP"
 PLUGIN.author = "Nforce"
+PLUGIN.description = "Disallows pickup of extra CID's."
 
 function PLUGIN:CanPlayerTakeItem(client, item)
 
