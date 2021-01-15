@@ -19,7 +19,7 @@ function PLUGIN:CanPlayerTakeItem(client, item)
 		hasID = false
 	end
 	if hasID == true then
-		if item:GetModel() == "models/gibs/metal_gib4.mdl" then -- cid index is 51
+		if item:GetModel() == "models/gibs/metal_gib4.mdl" then
 			return false
 		end
 	end
