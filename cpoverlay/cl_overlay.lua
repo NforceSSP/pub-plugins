@@ -34,7 +34,7 @@ function CombHUD()
 		local clipMax = weapon:GetMaxClip1()
 		local count = LocalPlayer():GetAmmoCount(weapon:GetPrimaryAmmoType())
 		local secondary = LocalPlayer():GetAmmoCount(weapon:GetSecondaryAmmoType())
-        Arm = "Unknown" -- honestly i don't know if this is necessary but /shrug
+        local Arm = "Unknown" -- honestly i don't know if this is necessary but /shrug
         for k, v in pairs(weps) do
             if tostring(LocalPlayer():GetActiveWeapon():GetPrintName()) == k then
                 Arm = v or "Unknown" -- honestly i don't know if this is necessary but /shrug
