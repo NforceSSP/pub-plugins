@@ -1,5 +1,5 @@
--- Personally I find this too overbearing, too much info in your face. You can use it if you want.
 
+-- Personally I find this too overbearing, too much info in your face. You can use it if you want.
 
 surface.CreateFont("HUDSmooth", {
     font = "Roboto",
