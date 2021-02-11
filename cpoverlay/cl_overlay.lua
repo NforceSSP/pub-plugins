@@ -19,7 +19,7 @@ local weps = {
 }
 function CombHUD()
     
-    if !LocalPlayer():IsValid() then return end -- you can fix this yourself, it errors and i cba to find the solution because it doesn't really matter since the hud still works
+    if !LocalPlayer():IsValid() or !LocalPlayer():Alive() then return end -- you can fix this yourself, it errors and i cba to find the solution because it doesn't really matter since the hud still works
     if LocalPlayer():IsCombine() then
         local tsin = TimedSin(.68, 200, 255, 0)
         local area = LocalPlayer():GetArea() or "Unknown" -- fyi if you step out of an area and there's no new area this won't update
