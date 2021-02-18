@@ -8,7 +8,7 @@ surface.CreateFont("HUDSmooth", {
     weight = 350,
 })
 
-local weps = {
+local weps = { -- this table is for the weapons printnames, to be shown correctly on the armament info.
     ["#HL2_Shotgun"] = "Shotgun",
     ["#HL2_Pistol"] = ".9mm USP-Match",
     ["#HL2_Pulse_Rifle"] = "Standard Issue Pulse Rifle",
