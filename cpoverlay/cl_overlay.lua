@@ -1,6 +1,6 @@
 
 -- Personally I find this too overbearing, too much info in your face. You can use it if you want.
-
+-- you might have to edit the location of the boxes btw this was made with 1280 x 720 reference
 surface.CreateFont("HUDSmooth", {
     font = "Roboto",
     size = 18,
