@@ -115,7 +115,7 @@ function CombHUD()
         surface.DrawRect(w+240, h - 330, 500, 45)]]-- to get the feedback to align with the box requires some schema configurations by the dev. commenting this out
 
         --main square 3 (armament info)
-        ga = LocalPlayer():GetActiveWeapon():GetClass()
+        local ga = LocalPlayer():GetActiveWeapon():GetClass()
         if ga == "ix_hands" or ga == "ix_keys" or ga == "gmod_tool" or ga == "weapon_physgun" then return end
         surface.SetDrawColor(17, 136, 247, 150)
         surface.DrawOutlinedRect(w+280, h+280, 300, 55)
