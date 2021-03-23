@@ -148,7 +148,7 @@ if (SERVER) then
 		if (self.nextUseTime > CurTime()) then
 			return
 		end
-
+		-- 2 is the index for cwu
 		if (!client:IsCombine() and client:Team() != FACTION_ADMIN and client:GetCharacter():GetClass() != 2) then
 			self:DisplayError()
 			self.nextUseTime = CurTime() + 2
