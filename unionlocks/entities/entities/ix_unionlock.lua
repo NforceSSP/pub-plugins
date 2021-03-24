@@ -165,14 +165,14 @@ if (SERVER) then
 	end
 else
 	local glowMaterial = ix.util.GetMaterial("sprites/glow04_noz")
-	local color_purple = Color(221, 23, 205)
-	local color_blue = Color(0, 100, 255, 255)
+	local color_purple = Color(221, 23, 205, 255)
+	local color_green = Color(0, 255, 0, 255)
 	local color_red = Color(255, 50, 50, 255)
 
 	function ENT:Draw()
 		self:DrawModel()
 
-		local color = color_blue
+		local color = color_green
 
 		if (self:GetDisplayError()) then
 			color = color_red
