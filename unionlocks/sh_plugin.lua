@@ -5,6 +5,8 @@ PLUGIN.name = "Union Locks"
 PLUGIN.author = "Nforce"
 PLUGIN.description = "Adds locks for civil workers."
 
+ix.util.Include("sv_hooks.lua")
+
 if SERVER then
     function PLUGIN:SaveUnionLocks()
         local data = {}
