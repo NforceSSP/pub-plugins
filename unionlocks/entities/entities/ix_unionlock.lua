@@ -8,7 +8,7 @@ ENT.Spawnable = true
 ENT.AdminOnly = true
 ENT.PhysgunDisable = true
 ENT.bNoPersist = true
-
+local PLUGIN = PLUGIN
 function ENT:SetupDataTables()
     self:NetworkVar("Bool", 0, "Locked")
     self:NetworkVar("Bool", 1, "DisplayError")
