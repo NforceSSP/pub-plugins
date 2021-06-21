@@ -1,10 +1,11 @@
 
 -- Personally I find this too overbearing, too much info in your face. You can use it if you want.
--- you might have to edit the location of the boxes btw this was made with 1280 x 720 reference
+-- as i am editing this on the 20th of june 2021 i have realized that panels would have made my life so much easier but i'm too lazy to remake the entire script now
 surface.CreateFont("HUDSmooth", {
     font = "Roboto",
     size = 18,
     antialias = true,
+    extended = false,
     weight = 350,
 })
 
@@ -24,18 +25,22 @@ function CombHUD()
         local tsin = TimedSin(.68, 200, 255, 0)
         local area = LocalPlayer():GetArea() or "Unknown" -- fyi if you step out of an area and there's no new area this won't update
         local tcolor = team.GetColor(LocalPlayer():Team())
-        local w = ScrW() / 2
-        local h = ScrH() / 2
+        local w, h = ScrW() / 2, ScrH() / 2
         local pos = LocalPlayer():GetPos()
         local grid = math.Round(pos.x / 100).."/"..math.Round(pos.y / 100)
         local weapon = LocalPlayer():GetActiveWeapon()
-	local money = LocalPlayer():GetCharacter():GetMoney() or 0
+	    local money = LocalPlayer():GetCharacter():GetMoney() or 0
         if !weapon:IsValid() then return end
-        local clip = weapon:Clip1()
-		local clipMax = weapon:GetMaxClip1()
-		local count = LocalPlayer():GetAmmoCount(weapon:GetPrimaryAmmoType())
-		local secondary = LocalPlayer():GetAmmoCount(weapon:GetSecondaryAmmoType())
+        local clip = weapon:Clip1() or "NaN"
+		local clipMax = weapon:GetMaxClip1() or "NaN"
+		local count = LocalPlayer():GetAmmoCount(weapon:GetPrimaryAmmoType()) or "NaN"
+		local secondary = LocalPlayer():GetAmmoCount(weapon:GetSecondaryAmmoType()) or "NaN"
         local Arm = "Unknown" -- honestly i don't know if this is necessary but /shrug
+
+        if count == 0 then
+            count = "NO RESERVE"
+        end
+
         for k, v in pairs(weps) do
             if tostring(LocalPlayer():GetActiveWeapon():GetPrintName()) == k then
                 Arm = v or "Unknown" -- honestly i don't know if this is necessary but /shrug
@@ -46,9 +51,7 @@ function CombHUD()
         elseif LocalPlayer():Health() >= 40 then
             hpCol = Color(255,239,17)
         else
-            if LocalPlayer():Health() < 40 then
-                hpCol = Color(tsin, 20, 20)
-            end
+            hpCol = Color(tsin, 20, 20)
         end
 
         if LocalPlayer():Armor() >= 70 then
@@ -56,32 +59,28 @@ function CombHUD()
         elseif LocalPlayer():Armor() >= 35 then
             armCol = Color(255,239,17)
         else
-            if LocalPlayer():Armor() < 35 then
-                armCol = Color(223,20,20)
-            end
+            armCol = Color(223,20,20)
         end
         if LocalPlayer():Team() == FACTION_MPF then
             lA = "LOCAL ASSET"
         else
-            if LocalPlayer():Team() == FACTION_OTA then
-                lA = "OVERWATCH ASSET"
-            end
+            lA = "OVERWATCH ASSET"
         end
         
         --main square 1 (unit info)
         surface.SetDrawColor(17, 136, 247, 150)
-        surface.DrawOutlinedRect(w-630, h - 340, 300, 180, 2)
+        surface.DrawOutlinedRect(w / 40, h / 5, 300, 180, 2)
         surface.SetDrawColor(66, 63, 63, 120)
-        surface.DrawRect(w-630, h - 340, 300, 180)
-        draw.SimpleText("LOCAL UNIT: "..LocalPlayer():Name(), "HUDSmooth", w-620, h-310, Color(255, 255, 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT)
-        draw.SimpleText(lA, "HUDSmooth", w-620, h-330, tcolor)
-        draw.SimpleText("ASSET HEALTH: "..LocalPlayer():Health(), "HUDSmooth", w-620,h-290, hpCol)
-        draw.SimpleText("ASSET ARMOR: "..LocalPlayer():Armor(), "HUDSmooth", w-620,h-270, armCol)
-        draw.SimpleText("ASSET TOKENS: "..money, "HUDSmooth", w-620, h-250)
+        surface.DrawRect(w / 40, h / 5, 300, 180)
+        draw.SimpleText("LOCAL UNIT: "..LocalPlayer():Name(), "HUDSmooth", w / 30, h / 4.05, Color(255, 255, 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_LEFT)
+        draw.SimpleText(lA, "HUDSmooth", w / 30, h / 4.7, tcolor)
+        draw.SimpleText("ASSET HEALTH: "..LocalPlayer():Health(), "HUDSmooth", w / 30,h / 3.5, hpCol)
+        draw.SimpleText("ASSET ARMOR: "..LocalPlayer():Armor(), "HUDSmooth", w / 30,h / 3.1, armCol)
+        draw.SimpleText("ASSET TOKENS: "..money, "HUDSmooth", w / 30, h / 2.76)
         surface.SetDrawColor(17, 136, 247, 150)
-        surface.DrawRect(w-628,h-225, 296, 5)
-        draw.SimpleText("BIOSIGNAL ZONE: "..area, "HUDSmooth", w-620, h-210)
-        draw.SimpleText("BIOSIGNAL GRID: "..grid, "HUDSmooth", w-620, h-190)
+        surface.DrawRect(w / 36,h / 2.4, 296, 5)
+        draw.SimpleText("BIOSIGNAL ZONE: "..area, "HUDSmooth", w / 30, h / 2.3)
+        draw.SimpleText("BIOSIGNAL GRID: "..grid, "HUDSmooth", w / 30, h / 2.1)
         --[[ local gm = LocalPlayer():GetModel() commented out because it looks ugly as hell & is unnecessary
         local gs = LocalPlayer():GetSkin()
         if LocalPlayer():Team() == 3 then
@@ -115,15 +114,17 @@ function CombHUD()
         surface.DrawRect(w+240, h - 330, 500, 45)]]-- to get the feedback to align with the box requires some schema configurations by the dev. commenting this out
 
         --main square 3 (armament info)
-        local ga = LocalPlayer():GetActiveWeapon():GetClass()
+        ga = LocalPlayer():GetActiveWeapon():GetClass()
         if ga == "ix_hands" or ga == "ix_keys" or ga == "gmod_tool" or ga == "weapon_physgun" then return end
         surface.SetDrawColor(17, 136, 247, 150)
-        surface.DrawOutlinedRect(w+280, h+280, 300, 55)
+        surface.DrawOutlinedRect(w * 1.6, h * 1.8, 300, 55)
         surface.SetDrawColor(66, 63, 63, 120)
-        surface.DrawRect(w + 280, h+280, 300, 55)
-        draw.SimpleText("ARM: "..Arm, "HUDSmooth", w + 290, h + 290)
-        draw.SimpleText("[ "..clip.." / "..clipMax.." ]", "HUDSmooth", w + 290, h + 310)
-        draw.SimpleText("[ "..count.." ]", "HUDSmooth", w + 360, h + 310)
+        surface.DrawRect(w * 1.6, h * 1.8, 300, 55)
+        draw.SimpleText("ARM: "..Arm, "HUDSmooth", w * 1.61, h * 1.81)
+
+        if clip < 0 and clipMax < 0 then return end
+        draw.SimpleText("[ "..clip.." / "..clipMax.." ]", "HUDSmooth", w * 1.61, h * 1.853)
+        draw.SimpleText("[ "..count.." ]", "HUDSmooth", w * 1.69, h * 1.853)
     end
 end 
 local direction = {
