@@ -40,9 +40,9 @@ hook.Add( "Think", "metroTalk", metroTalk )
 local nextSoundO = CurTime()
 local function overwatchTalk()
 
-	if CurTime() > nextSound then
+	if CurTime() > nextSoundO then
 	
-		nextSound = CurTime() + math.random(30, 80)
+		nextSoundO = CurTime() + math.random(30, 80)
 		for k, v in pairs(player.GetAll()) do
 			if v:GetMoveType() == MOVETYPE_NOCLIP then return end 
 			if v:Team() == FACTION_OTA then
