@@ -42,7 +42,7 @@ local function overwatchTalk()
 
 	if CurTime() > nextSound then
 	
-		nextSound = CurTime() + math.random(5, 10)
+		nextSound = CurTime() + math.random(30, 80)
 		for k, v in pairs(player.GetAll()) do
 			if v:GetMoveType() == MOVETYPE_NOCLIP then return end 
 			if v:Team() == FACTION_OTA then
